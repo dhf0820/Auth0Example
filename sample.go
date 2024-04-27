@@ -10,10 +10,12 @@ import (
 	//"github.com/auth0/go-jwt-middleware/v2"
 	jwtmiddleware "github.com/auth0/go-jwt-middleware/v2"
 	"github.com/auth0/go-jwt-middleware/v2/validator"
+	"github.com/davecgh/go-spew/spew"
 )
 
 var handler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	claims, ok := r.Context().Value(jwtmiddleware.ContextKey{}).(*validator.ValidatedClaims)
+	fmt.Printf("claims: %s\n", spew.Sdump(claims))
 	if !ok {
 		http.Error(w, "failed to get validated claims", http.StatusInternalServerError)
 		return
@@ -52,5 +54,5 @@ func main() {
 	// Set up the middleware.
 	middleware := jwtmiddleware.New(jwtValidator.ValidateToken)
 
-	http.ListenAndServe("0.0.0.0:3000", middleware.CheckJWT(handler))
+	http.ListenAndServe("0.0.0.0:5000", middleware.CheckJWT(handler))
 }
