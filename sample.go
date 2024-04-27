@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -29,6 +30,9 @@ var handler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 })
 
 func main() {
+	fmt.Printf(
+		"Starting server on http://localhost:3000\n",
+	)
 	keyFunc := func(ctx context.Context) (interface{}, error) {
 		// Our token must be signed using this data.
 		return []byte("secret"), nil
