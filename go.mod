@@ -1,4 +1,4 @@
-module github.com/dhf0820/Auth0Example.git
+module github.com/dhf0820/Auth0Example
 
 go 1.21.5
 
